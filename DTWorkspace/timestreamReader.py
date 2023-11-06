@@ -132,7 +132,7 @@ def lambda_handler(event, context):
 
 
     values_temp = []
-    values_bpm = []
+    values_hum = []
 
     for result_row in result_rows:
         ts = result_row['time']
@@ -148,7 +148,7 @@ def lambda_handler(event, context):
                 'value':  value
             })
         elif measure_name == 'bpm':
-             values_bpm.append({
+             values_hum.append({
                 'time': time,
                 'value':  value
             })
@@ -164,7 +164,7 @@ def lambda_handler(event, context):
     elif(measure_name == 'bpm'):
         property_values.append({
             'entityPropertyReference': entity_property_reference_bpm,
-            'values': values_bpm
+            'values': values_hum
         })
     LOGGER.info("property_values: %s", property_values)
 
