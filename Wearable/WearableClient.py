@@ -17,6 +17,7 @@ mqttc.configureCredentials("certificates/AmazonRootCA1.pem","certificates/wearab
 # Send message to the iot topic
 def send_data(message):
     mqttc.publish(topic, json.dumps(message), 0)
+    print("message: ",message)
     print("Message Published")
 
 # Loop until terminated
@@ -24,9 +25,10 @@ def loop():
      
      while(True):
           try:
-               temperature = random.uniform(36.5, 39.0)
+               
+               temperature = random.randint(37,41)
                bpm = random.randint(70,100)
-               print("Temp: {:.1f} C    BPM: {} ".format(temperature, bpm)) 
+               print("Temp: {}    BPM: {} ".format(temperature, bpm)) 
                
                message = {
                          'temperature': temperature,
