@@ -20,33 +20,7 @@ QUERY_CLIENT = boto3.client('timestream-query')
 
 # Utility function: parses a timestream row into a python dict for more convenient field access
 def parse_row(column_schema, timestream_row):
-    """
-    Example:
-    column=[
-        {'Name': 'TelemetryAssetId', 'Type': {'ScalarType': 'VARCHAR'}},
-        {'Name': 'measure_name', 'Type': {'ScalarType': 'VARCHAR'}},
-        {'Name': 'time', 'Type': {'ScalarType': 'TIMESTAMP'}},
-        {'Name': 'measure_value::double', 'Type': {'ScalarType': 'DOUBLE'}},
-        {'Name': 'measure_value::varchar', 'Type': {'ScalarType': 'VARCHAR'}}
-    ]
-    row={'Data': [
-        {'ScalarValue': 'Mixer_15_7e3c0bdf-3b1c-46b9-886b-14f9d0b9df4d'},
-        {'ScalarValue': 'alarm_status'},
-        {'ScalarValue': '2021-10-15 20:45:43.287000000'},
-        {'NullValue': True},
-        {'ScalarValue': 'ACTIVE'}
-    ]}
-
-    ->
-
-    {
-        'TelemetryAssetId': 'Mixer_15_7e3c0bdf-3b1c-46b9-886b-14f9d0b9df4d',
-        'measure_name': 'alarm_status',
-        'time': '2021-10-15 20:45:43.287000000',
-        'measure_value::double': None,
-        'measure_value::varchar': 'ACTIVE'
-    }
-    """
+    
     data = timestream_row['Data']
     result = {}
     for i in range(len(data)):
@@ -58,15 +32,7 @@ def parse_row(column_schema, timestream_row):
 
 # Utility function: parses timestream datum entries into (key,value) tuples. Only ScalarTypes currently supported.
 def parse_datum(info, datum):
-    """
-    Example:
-    info={'Name': 'time', 'Type': {'ScalarType': 'TIMESTAMP'}}
-    datum={'ScalarValue': '2021-10-15 20:45:25.793000000'}
-
-    ->
-
-    ('time', '2021-10-15 20:45:25.793000000')
-    """
+    
     if datum.get('NullValue', False):
         return info['Name'], None
     column_type = info['Type']
@@ -87,7 +53,7 @@ def lambda_handler(event, context):
     LOGGER.info("Selected property is %s", selected_property)
 
     # 1. EXECUTE THE QUERY TO RETURN VALUES FROM DATABASE
-    query_string = f"SELECT measure_name, time, measure_value::bigint" \
+    query_string = f"SELECT measure_name, time, measure_value::double" \
         f" FROM {DATABASE_NAME}.{TABLE_NAME} " \
         f" WHERE time > from_iso8601_timestamp('{event['startTime']}')" \
         f" AND time <= from_iso8601_timestamp('{event['endTime']}')" \
@@ -118,7 +84,7 @@ def lambda_handler(event, context):
 
     # 3. CONVERT THE QUERY RESULTS TO THE FORMAT TWINMAKER EXPECTS
 
-    # There must be one entityPropertyReference for bpm OR one for Temperature
+    
     entity_property_reference_temp = {}
     entity_property_reference_temp['componentName'] = TM_COMPONENT_NAME
     entity_property_reference_temp['propertyName'] = 'temperature'
@@ -129,15 +95,29 @@ def lambda_handler(event, context):
     entity_property_reference_bpm['componentName'] = TM_COMPONENT_NAME
     entity_property_reference_bpm['propertyName'] = 'bpm'
     entity_property_reference_bpm['entityId'] = TM_ENTITY_ID
-
+    
+    #lm = luminosity
+    entity_property_reference_lm = {}
+    entity_property_reference_lm['componentName'] = TM_COMPONENT_NAME
+    entity_property_reference_lm['propertyName'] = 'luminosity'
+    entity_property_reference_lm['entityId'] = TM_ENTITY_ID
+    
+    #oxy = oxygen saturation
+    entity_property_reference_ox = {}
+    entity_property_reference_ox['componentName'] = TM_COMPONENT_NAME
+    entity_property_reference_ox['propertyName'] = 'oxysaturation'
+    entity_property_reference_ox['entityId'] = TM_ENTITY_ID
+    
 
     values_temp = []
-    values_hum = []
+    values_bpm = []
+    values_lm = []
+    values_ox = []
 
     for result_row in result_rows:
         ts = result_row['time']
         measure_name = result_row['measure_name']
-        measure_value = result_row['measure_value::bigint']
+        measure_value = result_row['measure_value::double']
 
         time = get_iso8601_timestamp(ts)
         value = { 'doubleValue' : str(measure_value) }
@@ -148,9 +128,19 @@ def lambda_handler(event, context):
                 'value':  value
             })
         elif measure_name == 'bpm':
-             values_hum.append({
+            values_bpm.append({
                 'time': time,
                 'value':  value
+            })
+        elif measure_name == 'luminosity':
+            values_lm.append({
+                'time': time,
+                'value': value
+            })
+        elif measure_name == 'oxysaturation':
+            values_ox.append({
+                'time': time,
+                'value': value
             })
 
     # The final structure "propertyValues"
@@ -164,8 +154,21 @@ def lambda_handler(event, context):
     elif(measure_name == 'bpm'):
         property_values.append({
             'entityPropertyReference': entity_property_reference_bpm,
-            'values': values_hum
+            'values': values_bpm
         })
+    elif(measure_name == 'luminosity'):
+        property_values.append({
+            'entityPropertyReference': entity_property_reference_lm,
+            'values': values_lm
+        })
+    elif(measure_name == 'oxysaturation'):
+        property_values.append({
+            'entityPropertyReference': entity_property_reference_ox,
+            'values': values_ox
+        })
+    
+    
+        
     LOGGER.info("property_values: %s", property_values)
 
     # marshall propertyValues and nextToken into final response
