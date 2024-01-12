@@ -1,0 +1,617 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 13,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-iot-twinmaker-datasource",
+        "uid": "af64dbf2-a88e-42ae-9706-22dc45583f14"
+      },
+      "gridPos": {
+        "h": 21,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "datasource": "af64dbf2-a88e-42ae-9706-22dc45583f14",
+        "enableAutoQuery": false,
+        "queryRefreshInterval": 5,
+        "sceneId": "Person"
+      },
+      "targets": [
+        {
+          "componentName": "Watch1",
+          "datasource": {
+            "type": "grafana-iot-twinmaker-datasource",
+            "uid": "af64dbf2-a88e-42ae-9706-22dc45583f14"
+          },
+          "entityId": "1142e395-5b5d-457a-bf16-fc7d79080a62",
+          "filter": [],
+          "intervalStreaming": "5",
+          "isStreaming": false,
+          "properties": [
+            "temperature"
+          ],
+          "propertyDisplayNames": {},
+          "queryType": "EntityHistory",
+          "refId": "A"
+        },
+        {
+          "componentName": "Sensor1",
+          "datasource": {
+            "type": "grafana-iot-twinmaker-datasource",
+            "uid": "af64dbf2-a88e-42ae-9706-22dc45583f14"
+          },
+          "entityId": "f952830f-3c6d-490b-aa03-bfbba907a211",
+          "filter": [],
+          "hide": false,
+          "intervalStreaming": "5",
+          "isStreaming": true,
+          "properties": [
+            "bpm"
+          ],
+          "propertyDisplayNames": {},
+          "queryType": "EntityHistory",
+          "refId": "B"
+        }
+      ],
+      "transparent": true,
+      "type": "grafana-iot-twinmaker-sceneviewer-panel"
+    },
+    {
+      "datasource": {
+        "type": "grafana-iot-twinmaker-datasource",
+        "uid": "af64dbf2-a88e-42ae-9706-22dc45583f14"
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 7,
+        "x": 6,
+        "y": 0
+      },
+      "id": 14,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<font size=\"6\"> Histórico de Frequência Cardíaca </font>",
+        "mode": "html"
+      },
+      "pluginVersion": "10.3.0-64796",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "grafana-iot-twinmaker-datasource",
+        "uid": "af64dbf2-a88e-42ae-9706-22dc45583f14"
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 7,
+        "x": 15,
+        "y": 0
+      },
+      "id": 15,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<font size=\"6\"> Histórico de Temperatura </font>",
+        "mode": "html"
+      },
+      "pluginVersion": "10.3.0-64796",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "grafana-iot-twinmaker-datasource",
+        "uid": "af64dbf2-a88e-42ae-9706-22dc45583f14"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none",
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 9,
+        "x": 6,
+        "y": 2
+      },
+      "id": 8,
+      "interval": "1s",
+      "maxDataPoints": 10,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "timezone": [
+          "browser"
+        ],
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.3.0-63516",
+      "targets": [
+        {
+          "componentTypeId": "wearable1",
+          "datasource": {
+            "type": "grafana-iot-twinmaker-datasource",
+            "uid": "af64dbf2-a88e-42ae-9706-22dc45583f14"
+          },
+          "filter": [
+            {
+              "name": "bpm",
+              "op": "=",
+              "value": {}
+            }
+          ],
+          "properties": [
+            "bpm"
+          ],
+          "propertyDisplayNames": {},
+          "queryType": "ComponentHistory",
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "grafana-iot-twinmaker-datasource",
+        "uid": "af64dbf2-a88e-42ae-9706-22dc45583f14"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 9,
+        "x": 15,
+        "y": 2
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "componentName": "Watch1",
+          "datasource": {
+            "type": "grafana-iot-twinmaker-datasource",
+            "uid": "af64dbf2-a88e-42ae-9706-22dc45583f14"
+          },
+          "entityId": "bffe8699-0c26-49e7-9b56-09ab1efe5f96",
+          "filter": [
+            {
+              "name": "temperature",
+              "op": "=",
+              "value": {}
+            }
+          ],
+          "properties": [
+            "temperature"
+          ],
+          "propertyDisplayNames": {},
+          "queryType": "EntityHistory",
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "grafana-iot-twinmaker-datasource",
+        "uid": "af64dbf2-a88e-42ae-9706-22dc45583f14"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "displayName": "Frequência  Cardíaca",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 6,
+        "x": 6,
+        "y": 10
+      },
+      "id": 17,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto",
+        "text": {
+          "titleSize": 40,
+          "valueSize": 110
+        }
+      },
+      "pluginVersion": "10.3.0-64796",
+      "targets": [
+        {
+          "componentTypeId": "wearable1",
+          "datasource": {
+            "type": "grafana-iot-twinmaker-datasource",
+            "uid": "af64dbf2-a88e-42ae-9706-22dc45583f14"
+          },
+          "intervalStreaming": "5",
+          "isStreaming": true,
+          "properties": [
+            "bpm"
+          ],
+          "propertyDisplayNames": {},
+          "queryType": "ComponentHistory",
+          "refId": "A"
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "grafana-iot-twinmaker-datasource",
+        "uid": "af64dbf2-a88e-42ae-9706-22dc45583f14"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "displayName": "Temperatura",
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 40
+              }
+            ]
+          },
+          "unit": "degree",
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 6,
+        "x": 12,
+        "y": 10
+      },
+      "id": 16,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto",
+        "text": {
+          "titleSize": 40,
+          "valueSize": 90
+        }
+      },
+      "pluginVersion": "10.3.0-64796",
+      "targets": [
+        {
+          "componentTypeId": "wearable1",
+          "datasource": {
+            "type": "grafana-iot-twinmaker-datasource",
+            "uid": "af64dbf2-a88e-42ae-9706-22dc45583f14"
+          },
+          "filter": [
+            {
+              "name": "temperature",
+              "op": "=",
+              "value": {}
+            }
+          ],
+          "intervalStreaming": "5",
+          "isStreaming": true,
+          "properties": [
+            "temperature"
+          ],
+          "propertyDisplayNames": {},
+          "queryType": "ComponentHistory",
+          "refId": "A"
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "grafana-iot-twinmaker-datasource",
+        "uid": "af64dbf2-a88e-42ae-9706-22dc45583f14"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 6,
+        "x": 18,
+        "y": 10
+      },
+      "id": 13,
+      "options": {
+        "SVGBaseFix": true,
+        "add100Percentage": false,
+        "calcsMutation": "standard",
+        "centerAlignContent": false,
+        "codeData": "{\n  \"text\": \"Random text\"\n}",
+        "css": "* {\n  font-family: Open Sans;\n}\n\n.box {\n  border: solid #555 2px;\n  border-radius: 10px;\n  padding: 10px 20px;\n}\n",
+        "dynamicData": false,
+        "dynamicFieldDisplayValues": false,
+        "dynamicHtmlGraphics": false,
+        "dynamicProps": false,
+        "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>JavaScript Survey</title>\n  <style>\n    body {\n      font-family: Arial, sans-serif;\n      margin: 20px;\n    }\n\n    form {\n      max-width: 500px;\n      margin: 0 auto;\n    }\n\n    fieldset {\n      margin-bottom: 20px;\n      padding: 10px;\n      border: 1px solid #ccc;\n      border-radius: 5px;\n\t  overflow: auto;\n    }\n\n    legend {\n      font-weight: bold;\n    }\n\n    label {\n      display: block;\n      margin-bottom: 8px;\n    }\n  </style>\n</head>\n<body>\n\n  <form id=\"surveyForm\">\n    <fieldset>\n      <legend>Pergunta 1: Já foi hospitalizado anteriormente ?</legend>\n      <label>\n        <input type=\"radio\" name=\"q1\" value=\"sim\"> Sim\n      </label>\n      <label>\n        <input type=\"radio\" name=\"q1\" value=\"não\"> Não\n      </label>\n    </fieldset>\n\n    <fieldset>\n      <legend>Pergunta 2: Está tomando algum medicamento atualmente ?</legend>\n      <label>\n        <input type=\"radio\" name=\"q2\" value=\"sim\"> Sim\n      </label>\n      <label>\n        <input type=\"radio\" name=\"q2\" value=\"não\"> Não\n      </label>\n    </fieldset>\n\n\t <fieldset>\n      <legend>Pergunta 3: Alguma condição médica crônica ?</legend>\n      <label>\n        <input type=\"radio\" name=\"q3\" value=\"sim\"> Sim\n      </label>\n      <label>\n        <input type=\"radio\" name=\"q3\" value=\"não\"> Não\n      </label>\n    </fieldset>\n\t\n\t <fieldset>\n      <legend>Pergunta 4: Tem alguma alergia a medicamentos ?</legend>\n      <label>\n        <input type=\"radio\" name=\"q4\" value=\"sim\"> Sim\n      </label>\n      <label>\n        <input type=\"radio\" name=\"q4\" value=\"não\"> Não\n      </label>\n    </fieldset>\n\n    <fieldset>\n      <legend>Comentários adicionais</legend>\n      <label>\n        <textarea name=\"q3\" rows=\"4\" cols=\"50\"></textarea>\n      </label>\n    </fieldset>\n\n    <button type=\"button\" onclick=\"submitSurvey()\">Gravar na Blockchain</button>\n  </form>\n\n  <script>\n    function submitSurvey() {\n      // Gather user responses\n      const response1 = document.querySelector('input[name=\"q1\"]:checked');\n      const response2 = document.querySelector('input[name=\"q2\"]:checked');\n      const response3 = document.querySelector('textarea[name=\"q3\"]').value;\n\n      // Validate that all questions have been answered\n      if (!response1 || !response2) {\n        alert(\"Please answer all questions before submitting.\");\n        return;\n      }\n\n      // Construct and display the summary\n      const summary = `Survey Results:\n        Question 1: ${response1.value}\n        Question 2: ${response2.value}\n        Question 3: ${response3 || 'No additional comments'}\n      `;\n\n      alert(summary);\n\n      // You can send the survey data to a server for further processing here\n    }\n  </script>\n\n</body>\n</html>\n",
+        "onInit": "",
+        "onInitOnResize": false,
+        "onRender": "// Sets the value from the first series on every refresh\nconst htmlgraphicsValue = htmlNode.getElementById('htmlgraphics-value');\n\nif (htmlgraphicsValue) {\n  const valueField = data.series[0]?.fields[1];\n  if (valueField) {\n    const length = valueField.values.length;\n    htmlgraphicsValue.textContent = valueField.values.get(length - 1);\n  } else {\n    htmlgraphicsValue.textContent = \"No data\"\n  }\n}\n",
+        "overflow": "visible",
+        "panelupdateOnMount": true,
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull",
+            "last",
+            "firstNotNull",
+            "first",
+            "min",
+            "max",
+            "mean",
+            "sum",
+            "count",
+            "range",
+            "delta",
+            "step",
+            "diff",
+            "logmin",
+            "allIsZero",
+            "allIsNull",
+            "diffperc"
+          ]
+        },
+        "renderOnMount": true,
+        "rootCSS": "",
+        "useGrafanaScrollbar": true
+      },
+      "pluginVersion": "10.3.0-63516",
+      "transparent": true,
+      "type": "gapit-htmlgraphics-panel"
+    }
+  ],
+  "refresh": "",
+  "revision": 1,
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "DT1",
+  "uid": "-ErlH77Sz",
+  "version": 16,
+  "weekStart": ""
+}
