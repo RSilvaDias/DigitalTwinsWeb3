@@ -3,12 +3,14 @@ import json
 import time
 import random
 
-# MQTT config (clientID must be unique within the AWS account)
+# MQTT config
 clientID = "Watch1"
 endpoint = "a11tiojfrl1fep-ats.iot.us-east-1.amazonaws.com" 
 port = 8883
+topic = 'immersivity/data'
+
 #port = 443
-topic = "wearable/temperature"
+#topic = "wearable/temperature"
 
 # Init MQTT client
 mqttc = AWSIoTMQTTClient(clientID)
