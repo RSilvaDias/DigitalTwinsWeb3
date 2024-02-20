@@ -7,10 +7,13 @@ import random
 clientID = "Watch1"
 endpoint = "a11tiojfrl1fep-ats.iot.us-east-1.amazonaws.com" 
 port = 8883
-topic = 'immersivity/data'
+# This is the standard topic used in the Digital Twin
+topic = "wearable/temperature"
 
-#port = 443
-#topic = "wearable/temperature"
+# This topic is only for AR version and test.
+#topic = 'immersivity/data'
+
+
 
 # Init MQTT client
 mqttc = AWSIoTMQTTClient(clientID)
